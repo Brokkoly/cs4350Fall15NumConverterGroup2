@@ -203,35 +203,6 @@ void reverseCString(char toReverse[], int len){
 		toReverse[i] = tempOutputArray[i];
 	}
 }
-bool longDivision(int n, int d, char result[], int len){
-	//this is currently nonfunctional
-
-	char tempString[200];
-	char nString[100];
-	intToCString(n, nString, 100);
-	int nlength = cStringLen(nString);
-	int remainder = 0;
-	for (int i = 0; i < nlength; i++){
-		remainder = remainder * 10 + (nString[i] - '0');
-		if ((remainder / d) == 0){
-			tempString[i] = '0';
-			if (remainder / d > 0){
-				remainder = 0;
-			}
-		}
-		else{
-			tempString[i] = ((nString[i] - '0') / d);
-			remainder += (nString[i] - '0') % d;
-		}
-	}
-
-
-
-
-
-
-	return true;
-}
 int intStringToInt(char intString[], int len)
 {
 	//This Function converts a cstring representing an integer to an integer
@@ -263,5 +234,4 @@ int cStringLen(char inputArray[]){
 		}
 	}
 	return len;
-
 }
