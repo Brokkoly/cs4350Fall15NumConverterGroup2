@@ -142,7 +142,7 @@ bool divide(int c1, int n1, int d1, int c2, int n2, int d2, char result[], int l
     //replace this code with your function
     return false;
 }
-void intToCString(int input, char outputarray[], int outputsize){
+void intToCString(int input, char outputarray[]){
 	bool isNeg = false;
 	if (input < 0){
 		isNeg = true;
@@ -150,12 +150,12 @@ void intToCString(int input, char outputarray[], int outputsize){
 	}
 	//function for converting an integer to a Cstring
 	int tempInput = input;
-	char tempOutputArray[10];
-	char tempArray[10];
+	char tempOutputArray[10];//TODO replace 10 with a number that is 1+the order of MAX_int
+	char tempArray[10];//TODO replace 10 with a number that is 1+the order of MAX_int
 	int numDigits = 0;
 	for (int i = 0; i < 10; i++)
 	{
-
+		//This is the algorithm in use.
 		/*
 		152%10=2
 		152/10 = 15
@@ -166,7 +166,7 @@ void intToCString(int input, char outputarray[], int outputsize){
 		1%10 = 1
 		1/10 = 0
 		numdigits = 3
-
+		//After this process, tempArray would look like {2,5,1}
 
 
 		*/
@@ -195,7 +195,7 @@ void intToCString(int input, char outputarray[], int outputsize){
 }
 void reverseCString(char toReverse[], int len){
 	//it was necessary to reverse a cstring a few times, so it was put into its own helper function
-	char tempOutputArray[100];
+	char tempOutputArray[100];//TODO use Max_int
 	for (int i = 0; i < len; i++){
 		tempOutputArray[i] = toReverse[len - 1 - i];
 	}
