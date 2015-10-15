@@ -98,10 +98,37 @@ bool add(int c1, int n1, int d1, int c2, int n2, int d2, char result[], int len)
     return false;
 }
 //--
-bool subtract(int c1, int n1, int d1, int c2, int n2, int d2, char result[], int len)
-{
-    //replace this code with your function
-    return false;
+bool subtract(int c1, int n1, int d1, int c2, int n2, int d2, char result[], int len){
+	//Assuming that we are doing number 1 minus number 2
+	int c = c1 - c2;
+
+	/*
+
+	The code contained in this block is not workable code
+	//assuming that d is a multiple of 10
+
+
+	int dmult = d1 / d2;
+	int d;
+	int nconvert;
+	if (dmult > 1){//if d1 is bigger than d2
+	n2 = n2*dmult;
+	d2 = d1;
+	d = d1;
+	}
+	else{
+	n1 = n1 * dmult;
+	d1 = d2;
+	d = d2;
+	}
+	int n = n1 - n2;
+
+	// new number is c + n/d
+	//now to convert that to a
+
+	return true;
+	*/
+
 }
 //--
 bool multiply(int c1, int n1, int d1, int c2, int n2, int d2, char result[], int len)
@@ -114,4 +141,127 @@ bool divide(int c1, int n1, int d1, int c2, int n2, int d2, char result[], int l
 {
     //replace this code with your function
     return false;
+}
+void intToCString(int input, char outputarray[], int outputsize){
+	bool isNeg = false;
+	if (input < 0){
+		isNeg = true;
+		input = input*-1;
+	}
+	//function for converting an integer to a Cstring
+	int tempInput = input;
+	char tempOutputArray[10];
+	char tempArray[10];
+	int numDigits = 0;
+	for (int i = 0; i < 10; i++)
+	{
+
+		/*
+		152%10=2
+		152/10 = 15
+		numdigits = 1
+		15%10 = 5
+		15/10 = 1
+		numdigits = 2
+		1%10 = 1
+		1/10 = 0
+		numdigits = 3
+
+
+
+		*/
+		//TODO make this work if the input is zero
+		tempArray[i] = (tempInput % 10) + '0';
+		tempInput = tempInput / 10;
+		numDigits++;
+		if (tempInput == 0){
+			break;
+		}
+	}
+	if (isNeg){
+		tempArray[numDigits] = '-';
+		numDigits++;
+	}
+	for (int i = 0; i < numDigits; i++){
+		tempOutputArray[i] = tempArray[numDigits - 1 - i];
+	}
+	for (int i = 0; i < numDigits; i++){
+		outputarray[i] = tempOutputArray[i];
+	}
+	outputarray[numDigits] = '\0';
+
+
+
+}
+void reverseCString(char toReverse[], int len){
+	//it was necessary to reverse a cstring a few times, so it was put into its own helper function
+	char tempOutputArray[100];
+	for (int i = 0; i < len; i++){
+		tempOutputArray[i] = toReverse[len - 1 - i];
+	}
+	for (int i = 0; i < len; i++){
+		toReverse[i] = tempOutputArray[i];
+	}
+}
+bool longDivision(int n, int d, char result[], int len){
+	//this is currently nonfunctional
+
+	char tempString[200];
+	char nString[100];
+	intToCString(n, nString, 100);
+	int nlength = cStringLen(nString);
+	int remainder = 0;
+	for (int i = 0; i < nlength; i++){
+		remainder = remainder * 10 + (nString[i] - '0');
+		if ((remainder / d) == 0){
+			tempString[i] = '0';
+			if (remainder / d > 0){
+				remainder = 0;
+			}
+		}
+		else{
+			tempString[i] = ((nString[i] - '0') / d);
+			remainder += (nString[i] - '0') % d;
+		}
+	}
+
+
+
+
+
+
+	return true;
+}
+int intStringToInt(char intString[], int len)
+{
+	//This Function converts a cstring representing an integer to an integer
+	int result = 0;
+	int mult = 1;
+	reverseCString(intString, len);
+	for (int i = 0; i < len; i++)
+	{
+		mult = 1;
+		for (int j = 0; j < i; j++){
+			mult = mult * 10;
+		}
+		result += mult*(intString[i] - '0');
+	}
+	return result;
+}
+
+int cStringLen(char inputArray[]){
+	//A short helper function to make it easier to work with cStrings
+	int len = 0;
+	char current = 'd';
+	while (current != '\0'){
+		if (inputArray[len] != NULL){
+			current = inputArray[len];
+			len++;
+		}
+		else{
+			break;
+		}
+	}
+	return len;
+
 }
