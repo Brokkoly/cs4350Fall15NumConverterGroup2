@@ -182,16 +182,11 @@ void intToCString(int input, char outputarray[]){
 		tempArray[numDigits] = '-';
 		numDigits++;
 	}
+	reverseCString(tempArray, numDigits);
 	for (int i = 0; i < numDigits; i++){
-		tempOutputArray[i] = tempArray[numDigits - 1 - i];
-	}
-	for (int i = 0; i < numDigits; i++){
-		outputarray[i] = tempOutputArray[i];
+		outputarray[i] = tempArray[i];
 	}
 	outputarray[numDigits] = '\0';
-
-
-
 }
 void reverseCString(char toReverse[], int len){
 	//it was necessary to reverse a cstring a few times, so it was put into its own helper function
