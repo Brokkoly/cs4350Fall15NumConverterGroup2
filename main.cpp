@@ -102,6 +102,23 @@ bool subtract(int c1, int n1, int d1, int c2, int n2, int d2, char result[], int
 	//Assuming that we are doing number 1 minus number 2
 	int c = c1 - c2;
 	//Currently waiting to recieve the divide function code, then the subtract function can be implemented.
+	//TODO overflow checks. We need to standardize how we do these.
+	int tempNumerator1, tempNumerator2, finalDenominator;
+	tempNumerator1 = n1*d2;
+	tempNumerator2 = n2*d1;
+	finalDenominator = d1*d2;
+
+	int n = n1 - n2;
+	if (n > finalDenominator){
+		c += n / finalDenominator;
+		n = n%finalDenominator;
+	}
+
+
+
+
+
+
 	/*
 
 	The code contained in this block is not workable code
