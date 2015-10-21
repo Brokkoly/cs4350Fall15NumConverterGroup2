@@ -107,13 +107,24 @@ bool subtract(int c1, int n1, int d1, int c2, int n2, int d2, char result[], int
 	tempNumerator1 = n1*d2;
 	tempNumerator2 = n2*d1;
 	finalDenominator = d1*d2;
-
+	char cResult[20];
+	char mantissaResult[20];
 	int n = n1 - n2;
 	if (n > finalDenominator){
 		c += n / finalDenominator;
 		n = n%finalDenominator;
 	}
-	for (int i = 0; i < )
+	intToCString(c, cResult);
+	int j = 0;
+	for (j; (cResult[j] != '\0'||result[j]!='\0'); j++){
+		result[j] = cResult[j];
+	}
+	tempDivide(n, finalDenominator, mantissaResult);//use real division function in final code
+	for (int i = 0; mantissaResult[i] != '\0' || result[j] != '\0'; i++, j++){
+		result[j] = mantissaResult[i]
+	}
+
+
 
 
 
@@ -146,6 +157,9 @@ bool subtract(int c1, int n1, int d1, int c2, int n2, int d2, char result[], int
 	return true;
 	*/
 
+}
+bool tempDivide(int n, int d, char divResult[]){
+	//dummy function to represent using the division function
 }
 //--
 bool multiply(int c1, int n1, int d1, int c2, int n2, int d2, char result[], int len)
