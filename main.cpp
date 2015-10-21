@@ -113,7 +113,7 @@ bool subtract(int c1, int n1, int d1, int c2, int n2, int d2, char result[], int
 		c += n / finalDenominator;
 		n = n%finalDenominator;
 	}
-
+	for (int i = 0; i < )
 
 
 
@@ -184,8 +184,6 @@ void intToCString(int input, char outputarray[]){
 		1/10 = 0
 		numdigits = 3
 		//After this process, tempArray would look like {2,5,1}
-
-
 		*/
 		//TODO make this work if the input is zero
 		tempArray[i] = (tempInput % 10) + '0';
