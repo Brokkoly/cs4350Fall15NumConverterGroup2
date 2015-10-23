@@ -8,8 +8,10 @@ bool add(int c1, int n1, int d1, int c2, int n2, int d2, char result[], int len)
 bool subtract(int c1, int n1, int d1, int c2, int n2, int d2, char result[], int len);
 bool multiply(int c1, int n1, int d1, int c2, int n2, int d2, char result[], int len);
 bool divide(int c1, int n1, int d1, int c2, int n2, int d2, char result[], int len);
-
-int main()
+void intToCString(int input, char outputarray[]);
+void reverseCString(char toReverse[], int len);
+int cStringLen(char inputArray[]);
+/*int main()
 {
     //some numbers to work with
     char number1[] = "   123.456";
@@ -78,6 +80,12 @@ int main()
     }
     
     return 0;
+}*/
+int main(){
+	char answer[100];
+	subtract(1, 3, 10, 2, 6, 7, answer, 100);
+	cout << answer << endl;
+	getchar();
 }
 //--
 bool characteristic(char numString[], int& c)
@@ -119,9 +127,13 @@ bool subtract(int c1, int n1, int d1, int c2, int n2, int d2, char result[], int
 	for (j; (cResult[j] != '\0'||result[j]!='\0'); j++){
 		result[j] = cResult[j];
 	}
-	tempDivide(n, finalDenominator, mantissaResult);//use real division function in final code
-	for (int i = 0; mantissaResult[i] != '\0' || result[j] != '\0'; i++, j++){
-		result[j] = mantissaResult[i]
+	if (divide(n,0,0,finalDenominator,0,0,mantissaResult,20)){
+		//use real division function in final code
+		//if this equates to false that means something went wrong and we should throw an error.
+		cout << "ERROR in the divide function! Panic!" << endl;
+	}
+	for (int i = 1; mantissaResult[i] != '\0' || result[j] != '\0'; i++, j++){
+		result[j] = mantissaResult[i];
 	}
 
 
@@ -159,7 +171,8 @@ bool subtract(int c1, int n1, int d1, int c2, int n2, int d2, char result[], int
 
 }
 bool tempDivide(int n, int d, char divResult[]){
-	//dummy function to represent using the division function
+	float f = float(n / d);
+	sprintf(divResult,"%f", f);
 }
 //--
 bool multiply(int c1, int n1, int d1, int c2, int n2, int d2, char result[], int len)
