@@ -11,7 +11,9 @@ bool divide(int c1, int n1, int d1, int c2, int n2, int d2, char result[], int l
 void intToCString(int input, char outputarray[]);
 void reverseCString(char toReverse[], int len);
 int cStringLen(char inputArray[]);
-/*int main()
+int getNumDigits(int num);
+int fractionToDecimal(int n, int d, int len);
+int main()
 {
     //some numbers to work with
     char number1[] = "   123.456";
@@ -80,13 +82,8 @@ int cStringLen(char inputArray[]);
     }
     
     return 0;
-}*/
-int main(){
-	char answer[100];
-	subtract(1, 3, 10, 2, 6, 7, answer, 100);
-	cout << answer << endl;
-	getchar();
 }
+
 //--
 bool characteristic(char numString[], int& c)
 {
@@ -145,10 +142,81 @@ bool multiply(int c1, int n1, int d1, int c2, int n2, int d2, char result[], int
     return false;
 }
 //--
-bool divide(int c1, int n1, int d1, int c2, int n2, int d2, char result[], int len)
-{
-    //replace this code with your function
-    return false;
+bool divide(int c1, int n1, int d1, int c2, int n2, int d2, char result[], int len){
+	if (d1 == 0 || d2 == 0 || (c2 == 0 && n2 == 0)){
+		return false;
+	}
+	else{
+		//get fractions back to "decimal" with part of the number after the decimal saved as int
+		int decimal1 = fractionToDecimal(n1, d1, len);
+		int decimal2 = fractionToDecimal(n2, d2, len);
+
+		//figure out have many digits the whole numbers will take up in the answer
+		int aproximation = c1 / c2;
+		int digits = getNumDigits(aproximation);
+
+		//check if answer will be negative
+		bool negative = false;
+		if (aproximation < 0){
+			negative = true;
+		}
+
+		//tack on the "c"s to the beginning of the numbers
+		int powersOfTen = 1;
+		for (int i = 0; i < len; i++){
+			powersOfTen = powersOfTen * 10;
+		}
+		int number1 = c1 * powersOfTen + decimal1;
+		int number2 = c2 * powersOfTen + decimal2;
+
+		//divide the two numbers
+		int answer = 0;
+		int newNum = number1 * 10;
+		for (int i = 0; i < len - 2; i++){
+			answer = answer * 10;
+			int newDigit;
+			newDigit = newNum / number2;
+			newNum = newNum%number2 * 10;
+			answer = answer + newDigit;
+		}
+
+		//find number of preceding zeros
+		int numDigitsInAnswer = getNumDigits(answer);
+		int numZeros = 0;
+		if (numDigitsInAnswer < len - 1){
+			numZeros = (len - 1) - numDigitsInAnswer;
+		}
+
+		//seperate answer integer into it's parts and store it in result array
+		int thisNum;
+		int thisDigit;
+		int runningNum = 0;
+		int tens = 1;
+		for (int i = 0;i < digits; i++){
+			tens *= 10;
+		}
+		for (int i = 0; i < len - 1; i++){
+
+			if (i == digits){
+				result[i] = '.';
+				numZeros++;
+			}
+			else if (numZeros > i){
+				result[i] = '0';
+			}
+			else{
+				runningNum = runningNum * 10;
+				tens = tens / 10;
+				thisNum = answer / tens;
+				thisDigit = thisNum - runningNum;
+				runningNum = runningNum + thisDigit;
+				result[i] = thisDigit + '0';
+			}
+		}
+		result[len - 1] = '\0';
+
+		return true;
+	}
 }
 void intToCString(int input, char outputarray[]){
 	bool isNeg = false;
@@ -235,4 +303,30 @@ int cStringLen(char inputArray[]){
 		}
 	}
 	return len;
+}
+int fractionToDecimal(int n, int d, int len){
+	//takes in a numerater and denominator and converts them into a decimal
+	int decimal = 0;
+	int remander = n * 10;
+	int newDigit;
+	for (int i = 0; i < len; i++){
+		decimal = decimal * 10;
+		newDigit = remander / d;
+		remander = (remander%d) * 10;
+		decimal = decimal + newDigit;
+	}
+	return decimal;
+}
+int getNumDigits(int num){
+	//returns the number of digits an integer has
+	int powersOfTen = 1;
+	int numDigits = 0;
+	while (powersOfTen <= num){
+		powersOfTen *= 10;
+		numDigits++;
+	}
+	if (num == 0){
+		numDigits = 1;
+	}
+	return numDigits;
 }
