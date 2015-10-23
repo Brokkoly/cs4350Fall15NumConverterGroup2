@@ -131,48 +131,12 @@ bool subtract(int c1, int n1, int d1, int c2, int n2, int d2, char result[], int
 		//use real division function in final code
 		//if this equates to false that means something went wrong and we should throw an error.
 		cout << "ERROR in the divide function! Panic!" << endl;
+		return false;
 	}
 	for (int i = 1; mantissaResult[i] != '\0' || result[j] != '\0'; i++, j++){
 		result[j] = mantissaResult[i];
 	}
-
-
-
-
-
-
-
-	/*
-
-	The code contained in this block is not workable code
-	//assuming that d is a multiple of 10
-
-
-	int dmult = d1 / d2;
-	int d;
-	int nconvert;
-	if (dmult > 1){//if d1 is bigger than d2
-	n2 = n2*dmult;
-	d2 = d1;
-	d = d1;
-	}
-	else{
-	n1 = n1 * dmult;
-	d1 = d2;
-	d = d2;
-	}
-	int n = n1 - n2;
-
-	// new number is c + n/d
-	//now to convert that to a
-
 	return true;
-	*/
-
-}
-bool tempDivide(int n, int d, char divResult[]){
-	float f = float(n / d);
-	sprintf(divResult,"%f", f);
 }
 //--
 bool multiply(int c1, int n1, int d1, int c2, int n2, int d2, char result[], int len)
